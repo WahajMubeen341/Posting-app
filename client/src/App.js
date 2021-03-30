@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
+import Carousel from 'react-material-ui-carousel'
+import { Container, AppBar, Typography, Grow, Grid, Paper, Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
 import Posts from "./components/Posts/Posts";
@@ -13,12 +14,39 @@ const App = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  var items = [
+    {
+        name: "Share",
+       // description: "Probably the most random thing you have ever seen!"
+    },
+    {
+        name: "Upload",
+        //description: "Hello World!"<p>{props.item.description}</p>
+    }
+]
+function Item(props)
+{
+    return (
+        <Paper>
+            <h1 style={{alignSelf:'center', justifyContent:'center',size:'larger'}}>{props.item.name}</h1>
+            
+
+        </Paper>
+    )
+}
+
   useEffect(() => {
     console.log("useEffect triggered");
     dispatch(getPosts());
   }, [dispatch, currentId]);
   return (
     <Container maxWidth="lg">
+       <Carousel className={classes.neon}>
+            {
+                items.map( (item, i) => <Item key={i} item={item} /> )
+              //<Item  item={item}/>
+           }
+        </Carousel>
       <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography className={classes.heading} variant="h2" align="center">
           Memories

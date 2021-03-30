@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
+//import {useSelector} from 'react-redux';
 
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
+import swal from "sweetalert";
 
 //GET THE CURRENT ID OF THE POST WE ARE ON
 
@@ -21,6 +23,7 @@ const Form = ({ currentId, setCurrentId }) => {
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
 
+  //const fetchedPosts = useSelector((state) => state.posts);
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -39,7 +42,9 @@ const Form = ({ currentId, setCurrentId }) => {
     } else {
       dispatch(createPost(postData));
     }
+    swal("Post Submitted", "Updating your post", "success");
     clear();
+
     //console.log("after dispatch");
   };
   const clear = () => {
@@ -54,11 +59,11 @@ const Form = ({ currentId, setCurrentId }) => {
   };
 
   return (
+   
     <Paper className={classes.paper}>
       <form
-
         autoComplete="off"
-        noValidate 
+        noValidate
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
@@ -74,9 +79,11 @@ const Form = ({ currentId, setCurrentId }) => {
           onChange={(e) =>
             setPostData({ ...postData, creator: e.target.value })
           }
+          required
         />
 
         <TextField
+          required
           name="title"
           variant="outlined"
           label="Title"
@@ -86,6 +93,7 @@ const Form = ({ currentId, setCurrentId }) => {
         />
 
         <TextField
+          required
           name="message"
           variant="outlined"
           label="Message"
@@ -96,12 +104,15 @@ const Form = ({ currentId, setCurrentId }) => {
           }
         />
         <TextField
+          required
           name="tags"
           variant="outlined"
           label="Tags"
           fullWidth
           value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
+          onChange={(e) =>
+            setPostData({ ...postData, tags: e.target.value.split(",") })
+          }
         />
         <div className={classes.fileInput}>
           <FileBase
@@ -134,7 +145,9 @@ const Form = ({ currentId, setCurrentId }) => {
         </Button>
       </form>
     </Paper>
+  
   );
+
 };
 
 export default Form;
