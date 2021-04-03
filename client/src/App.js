@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Carousel from 'react-material-ui-carousel'
-import { Container, AppBar, Typography, Grow, Grid, Paper, Button } from "@material-ui/core";
+import Carousel from "react-material-ui-carousel";
+import {
+  Container,
+  AppBar,
+  Typography,
+  Grow,
+  Grid,
+  Paper,
+  Button,
+} from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
 import Posts from "./components/Posts/Posts";
@@ -8,6 +16,7 @@ import Form from "./components/Form/Form";
 import { getPosts } from "./actions/posts";
 import memories from "./images/memories.png";
 import useStyles from "./styles";
+import ParticlesBg from "particles-bg";
 
 const App = () => {
   const [currentId, setCurrentId] = useState(null);
@@ -16,24 +25,29 @@ const App = () => {
 
   var items = [
     {
-        name: "Share",
-       // description: "Probably the most random thing you have ever seen!"
+      name: "Share",
+      // description: "Probably the most random thing you have ever seen!"
     },
     {
-        name: "Upload",
-        //description: "Hello World!"<p>{props.item.description}</p>
-    }
-]
-function Item(props)
-{
+      name: "Upload",
+      //description: "Hello World!"<p>{props.item.description}</p>
+    },
+  ];
+  function Item(props) {
     return (
-        <Paper>
-            <h1 style={{alignSelf:'center', justifyContent:'center',size:'larger'}}>{props.item.name}</h1>
-            
-
-        </Paper>
-    )
-}
+      <Paper>
+        <h1
+          style={{
+            alignSelf: "center",
+            justifyContent: "center",
+            size: "larger",
+          }}
+        >
+          {props.item.name}
+        </h1>
+      </Paper>
+    );
+  }
 
   useEffect(() => {
     console.log("useEffect triggered");
@@ -41,12 +55,16 @@ function Item(props)
   }, [dispatch, currentId]);
   return (
     <Container maxWidth="lg">
-       <Carousel className={classes.neon}>
-            {
-                items.map( (item, i) => <Item key={i} item={item} /> )
-              //<Item  item={item}/>
-           }
-        </Carousel>
+      <ParticlesBg type="circle" bg={true} />
+
+      <Carousel className={classes.neon}>
+        {
+          items.map((item, i) => (
+            <Item key={i} item={item} />
+          ))
+          //<Item  item={item}/>
+        }
+      </Carousel>
       <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography className={classes.heading} variant="h2" align="center">
           Memories
@@ -61,7 +79,7 @@ function Item(props)
       <Grow in>
         <Container>
           <Grid
-          className={classes.mainContainer}
+            className={classes.mainContainer}
             container
             justify="space-between"
             alignitem="stretch"
