@@ -46,7 +46,7 @@ const App = () => {
           justifySelf: "center",
           fontSize: "larger",
 
-          marginTop: "17%",
+          marginTop: "20%",
         }}
       >
         <h1
@@ -55,6 +55,7 @@ const App = () => {
             justifyContent: "center",
             fontSize: 100,
             color: "white",
+            textShadow: '5px 5px #558ABB',
           }}
         >
           {props.item.name}
@@ -76,7 +77,7 @@ const App = () => {
           marginBottom: "10%",
         }}
       >
-        <ParticlesBg type="circle" bg={true} />
+        <ParticlesBg type="fountain" bg={true} />
         <Carousel className={classes.neon}>
           {
             items.map((item, i) => (
