@@ -25,27 +25,41 @@ const App = () => {
 
   var items = [
     {
-      name: "Share",
+      name: "Share your memories",
       // description: "Probably the most random thing you have ever seen!"
     },
     {
-      name: "Upload",
+      name: "Upload them",
+      //description: "Hello World!"<p>{props.item.description}</p>
+    },
+    {
+      name: "Post your reflections",
       //description: "Hello World!"<p>{props.item.description}</p>
     },
   ];
   function Item(props) {
     return (
-      <Paper>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          justifySelf: "center",
+          fontSize: "larger",
+
+          marginTop: "17%",
+        }}
+      >
         <h1
           style={{
             alignSelf: "center",
             justifyContent: "center",
-            size: "larger",
+            fontSize: 100,
+            color: "white",
           }}
         >
           {props.item.name}
         </h1>
-      </Paper>
+      </div>
     );
   }
 
@@ -55,17 +69,23 @@ const App = () => {
   }, [dispatch, currentId]);
   return (
     <Container maxWidth="lg">
-      <ParticlesBg type="circle" bg={true} />
-
-      <Carousel className={classes.neon}>
-        {
-          items.map((item, i) => (
-            <Item key={i} item={item} />
-          ))
-          //<Item  item={item}/>
-        }
-      </Carousel>
-      <AppBar className={classes.appBar} position="static" color="inherit">
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "10%",
+        }}
+      >
+        <ParticlesBg type="circle" bg={true} />
+        <Carousel className={classes.neon}>
+          {
+            items.map((item, i) => (
+              <Item key={i} item={item} />
+            ))
+            //<Item  item={item}/>
+          }
+        </Carousel>
+        {/* <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography className={classes.heading} variant="h2" align="center">
           Memories
           <img
@@ -76,8 +96,11 @@ const App = () => {
           />
         </Typography>
       </AppBar>
+      */}
+      </div>
+
       <Grow in>
-        <Container>
+        <Container style={{marginTop:'30%'}}>
           <Grid
             className={classes.mainContainer}
             container
